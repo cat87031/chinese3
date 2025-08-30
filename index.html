@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>114學年度上學期二年級國語南一版 - 第三課勇氣樹</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft JhengHei", "Heiti TC", "LiHei Pro", sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #4CAF50;
+            background: linear-gradient(to right, #E8F5E9, #C8E6C9);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        h1 {
+            color: #2E7D32;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #388E3C;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #C8E6C9;
+        }
+        
+        h3 {
+            color: #4CAF50;
+            margin: 20px 0 10px;
+        }
+        
+        .lesson-content {
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            line-height: 2.2;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .bopomofo {
+            font-size: 0.8em;
+            color: #FF5722;
+            vertical-align: top;
+            margin-right: 2px;
+        }
+        
+        .vocabulary-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 18px;
+            margin: 25px 0;
+        }
+        
+        .vocabulary-item {
+            background: linear-gradient(to bottom, #E8F5E9, #C8E6C9);
+            padding: 18px 12px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid #A5D6A7;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vocabulary-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            background: linear-gradient(to bottom, #C8E6C9, #A5D6A7);
+        }
+        
+        .vocabulary-item .bopomofo-small {
+            display: block;
+            font-size: 0.9rem;
+            color: #FF5722;
+            margin-top: 5px;
+        }
+        
+        .similar-characters, .polyphonic-characters, .homophones {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .character-group {
+            background: #F1F8E9;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .character-group:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .character-group h3 {
+            text-align: center;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .character-group ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+        
+        .character-group li {
+            padding: 8px 0;
+            font-size: 1.2rem;
+            border-bottom: 1px dashed #C8E6C9;
+        }
+        
+        .character-group li:last-child {
+            border-bottom: none;
+        }
+        
+        .character-detail {
+            display: none;
+            background: linear-gradient(to bottom, #E8F5E9, #F1F8E9);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 2px solid #A5D6A7;
+        }
+        
+        .character-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .character-large {
+            font-size: 140px;
+            line-height: 1;
+            color: #2E7D32;
+            text-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            margin-right: 30px;
+        }
+        
+        .character-info-basic {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .character-info-basic p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+        }
+        
+        .character-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .info-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        
+        .info-section h3 {
+            color: #2E7D32;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-section h3 i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        
+        .info-section ul {
+            padding-left: 25px;
+            margin-top: 15px;
+        }
+        
+        .info-section li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .external-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .external-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .external-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: linear-gradient(to right, #2E7D32, #1B5E20);
+        }
+        
+        .download-btn {
+            display: block;
+            width: 250px;
+            margin: 40px auto;
+            padding: 15px;
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            background: linear-gradient(to right, #2E7D32, #1B5E20);
+        }
+        
+        .highlight {
+            background: #FFF9C4;
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .similar-characters .bopomofo, .polyphonic-characters .bopomofo, .homophones .bopomofo {
+            font-size: 0.7em;
+        }
+        
+        @media (max-width: 900px) {
+            .character-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .character-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .character-large {
+                margin-right: 0;
+                margin-bottom: 20px;
+                font-size: 100px;
+            }
+            
+            .similar-characters, .polyphonic-characters, .homophones {
+                grid-template-columns: 1fr;
+            }
+            
+            .external-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .vocabulary-list {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .character-large {
+                font-size: 80px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .lesson-content {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> 114學年度上學期二年級國語</h1>
+            <h2>南一版 - 第三課：勇氣樹</h2>
+        </header>
+        
+        <section>
+            <h2><span class="section-icon">1</span> 課文內容</h2>
+            <div class="lesson-content">
+                <p>第二課　爬梯子</p>
+                <p>　　房門上貼了一大張白紙，紙上有一條又一條的線，好像長長的梯子。媽媽說：「這是我們家人的身高線。</p>
+                <p>　　生日那天，我迫不及待的站在身高線前面，爸爸沿著我的頭頂，在紙上畫一條線，開心的說：「你又長高了！」</p>
+                <p>　　太好了！我又向上爬了一格，不知道哪一天我才會爬到最高呢？</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">2</span> 多音字比較</h2>
+            <div class="polyphonic-characters">
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 教 <span class="bopomofo">ㄐㄧㄠˋ</span> vs 教 <span class="bopomofo">ㄐㄧㄠ</span></h3>
+                    <ul>
+                        <li>教 (ㄐㄧㄠˋ)：教導、教誨 - 教育、教師</li>
+                        <li>教 (ㄐㄧㄠˋ)：指宗教 - 佛教、教會</li>
+                        <li>教 (ㄐㄧㄠˋ)：禮儀、規矩 - 家教、教養</li>
+                        <li>教 (ㄐㄧㄠ)：傳授 - 教書、教學</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 倒 <span class="bopomofo">ㄉㄠˇ</span> vs 倒 <span class="bopomofo">ㄉㄠˋ</span></h3>
+                    <ul>
+                        <li>倒 (ㄉㄠˇ)：由直立而橫躺 - 跌倒、摔倒</li>
+                        <li>倒 (ㄉㄠˇ)：崩塌 - 沖倒、倒塌</li>
+                        <li>倒 (ㄉㄠˇ)：生意失敗 - 倒閉、倒店</li>
+                        <li>倒 (ㄉㄠˋ)：傾倒出來 - 倒垃圾、倒茶</li>
+                        <li>倒 (ㄉㄠˋ)：方向相反 - 倒掛、倒立</li>
+                        <li>倒 (ㄉㄠˋ)：向後退 - 倒退、倒車</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">3</span> 同音字比較</h2>
+            <div class="homophones">
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 室 <span class="bopomofo">ㄕˋ</span> vs 事 <span class="bopomofo">ㄕˋ</span> vs 是 <span class="bopomofo">ㄕˋ</span> vs 試 <span class="bopomofo">ㄕˋ</span></h3>
+                    <ul>
+                        <li>室：地下室、臥室、教室</li>
+                        <li>事：本事、家事、事情</li>
+                        <li>是：是非、是否、可是</li>
+                        <li>試：考試、嘗試、試試</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">4</span> 形近字比較</h2>
+            <div class="similar-characters">
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 棵 <span class="bopomofo">ㄎㄜ</span> vs 果 <span class="bopomofo">ㄍㄨㄛˇ</span></h3>
+                    <ul>
+                        <li>棵：一棵樹、幾棵草</li>
+                        <li>果：水果、果汁、果實</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 怕 <span class="bopomofo">ㄆㄚˋ</span> vs 白 <span class="bopomofo">ㄅㄞˊ</span> vs 拍 <span class="bopomofo">ㄆㄞ</span></h3>
+                    <ul>
+                        <li>怕：害怕、可怕、怕生</li>
+                        <li>白：白雪、白色、白紙</li>
+                        <li>拍：拍手、拍打、拍照</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 完 <span class="bopomofo">ㄨㄢˊ</span> vs 玩 <span class="bopomofo">ㄨㄢˊ</span></h3>
+                    <ul>
+                        <li>完：完全、完美、完成</li>
+                        <li>玩：玩具、遊玩、玩耍</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 倒 <span class="bopomofo">ㄉㄠˇ</span> vs 到 <span class="bopomofo">ㄉㄠˋ</span></h3>
+                    <ul>
+                        <li>倒：摔倒、弄倒、倒水</li>
+                        <li>到：遲到、到達、到處</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 時 <span class="bopomofo">ㄕˊ</span> vs 待 <span class="bopomofo">ㄉㄞˋ</span></h3>
+                    <ul>
+                        <li>時：時間、守時、時候</li>
+                        <li>待：等待、期待、待遇</li>
+                    </ul>
+                </div>
+                
+                <div class="character-group">
+                    <h3><i class="fas fa-exchange-alt"></i> 故 <span class="bopomofo">ㄍㄨˋ</span> vs 收 <span class="bopomofo">ㄕㄡ</span></h3>
+                    <ul>
+                        <li>故：故意、原故、故事</li>
+                        <li>收：回收、收拾、收穫</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><span class="section-icon">5</span> 生字總表</h2>
+            <div class="vocabulary-list">
+                <div class="vocabulary-item" onclick="showCharacterDetail('爬', 'ㄆㄚˊ', '爪', 8, '半包圍結構')">
+                    爬 <span class="bopomofo-small">ㄆㄚˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('梯', 'ㄊㄧ', '木', 11, '左右結構')">
+                    梯 <span class="bopomofo-small">ㄊㄧ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('紙', 'ㄓˇ', '糸', 10, '左右結構')">
+                    紙 <span class="bopomofo-small">ㄓˇ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('條', 'ㄊㄧㄠˊ', '木', 11, '上下結構')">
+                    條 <span class="bopomofo-small">ㄊㄧㄠˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('線', 'ㄒㄧㄢˋ', '糸', 15, '左右結構')">
+                    線 <span class="bopomofo-small">ㄒㄧㄢˋ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('像', 'ㄒㄧㄤˋ', '人', 13, '左右結構')">
+                    像 <span class="bopomofo-small">ㄒㄧㄤˋ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('身', 'ㄕㄣ', '身', 7, '獨體字')">
+                    身 <span class="bopomofo-small">ㄕㄣ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('生', 'ㄕㄥ', '生', 5, '獨體字')">
+                    生 <span class="bopomofo-small">ㄕㄥ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('迫', 'ㄆㄛˋ', '辵', 8, '半包圍結構')">
+                    迫 <span class="bopomofo-small">ㄆㄛˋ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('及', 'ㄐㄧˊ', '又', 3, '獨體字')">
+                    及 <span class="bopomofo-small">ㄐㄧˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('待', 'ㄉㄞˋ', '彳', 9, '左右結構')">
+                    待 <span class="bopomofo-small">ㄉㄞˋ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('站', 'ㄓㄢˋ', '立', 10, '左右結構')">
+                    站 <span class="bopomofo-small">ㄓㄢˋ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('沿', 'ㄧㄢˊ', '水', 8, '左右結構')">
+                    沿 <span class="bopomofo-small">ㄧㄢˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('頂', 'ㄉㄧㄥˇ', '頁', 11, '左右結構')">
+                    頂 <span class="bopomofo-small">ㄉㄧㄥˇ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('格', 'ㄍㄜˊ', '木', 10, '左右結構')">
+                    格 <span class="bopomofo-small">ㄍㄜˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('哪', 'ㄋㄚˇ', '口', 9, '左右結構')">
+                    哪 <span class="bopomofo-small">ㄋㄚˇ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('才', 'ㄘㄞˊ', '手', 3, '獨體字')">
+                    才 <span class="bopomofo-small">ㄘㄞˊ</span>
+                </div>
+                <div class="vocabulary-item" onclick="showCharacterDetail('最', 'ㄗㄨㄟˋ', '曰', 12, '上下結構')">
+                    最 <span class="bopomofo-small">ㄗㄨㄟˋ</span>
+                </div>
+            </div>
+        </section>
+        
+        <section id="character-detail" class="character-detail">
+            <div class="character-header">
+                <div class="character-large" id="char-large">爬</div>
+                <div class="character-info-basic">
+                    <h3>生字詳解</h3>
+                    <p>注音：<span id="char-bopomofo" class="bopomofo">ㄆㄚˊ</span></p>
+                    <p>部首：<span id="char-radical">爪</span></p>
+                    <p>筆畫：<span id="char-strokes">8</span> 畫</p>
+                    <p>結構：<span id="char-structure">半包圍結構</span></p>
+                </div>
+            </div>
+            
+            <div class="character-info">
+                <div class="info-section">
+                    <h3><i class="fas fa-pen-nib"></i> 造詞</h3>
+                    <ul id="char-words">
+                        <li>爬山</li>
+                        <li>爬行</li>
+                        <li>爬蟲</li>
+                        <li>爬梯</li>
+                        <li>攀爬</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-language"></i> 成語</h3>
+                    <ul id="char-idioms">
+                        <li>爬羅剔抉</li>
+                        <li>連滾帶爬</li>
+                        <li>爬梳剔抉</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-comment-alt"></i> 造句範例</h3>
+                    <ul id="char-sentences">
+                        <li>週末我們全家去<span class="highlight">爬</span>山，欣賞美麗的風景。</li>
+                        <li>烏龜在地上緩慢地<span class="highlight">爬</span>行。</li>
+                        <li>小孩子喜歡<span class="highlight">爬</span>來<span class="highlight">爬</span>去地探索世界。</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3><i class="fas fa-lightbulb"></i> 字義解釋</h3>
+                    <ul id="char-meaning">
+                        <li>手腳並用向前移動</li>
+                        <li>向上攀登</li>
+                        <li>伏地而行</li>
+                        <li>比喻努力向上</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="external-links">
+                <a href="https://pedia.cloud.edu.tw/Entry/Detail/?title=爬" class="external-link" target="_blank" id="edu-link">
+                    <i class="fas fa-external-link-alt"></i> 教育百科 - 爬
+                </a>
+                <a href="https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=爬" class="external-link" target="_blank" id="idiom-link">
+                    <i class="fas fa-external-link-alt"></i> 成語典 - 爬相關成語
+                </a>
+            </div>
+        </section>
+        
+        <a href="#" class="download-btn"><i class="fas fa-download"></i> 下載學習資料</a>
+    </div>
+
+    <script>
+        // 生字資料庫
+        const characterData = {
+            '爬': {
+                words: ['爬山', '爬行', '爬蟲', '爬梯', '攀爬'],
+                idioms: ['爬羅剔抉', '連滾帶爬', '爬梳剔抉'],
+                sentences: [
+                    '週末我們全家去<span class="highlight">爬</span>山，欣賞美麗的風景。',
+                    '烏龜在地上緩慢地<span class="highlight">爬</span>行。',
+                    '小孩子喜歡<span class="highlight">爬</span>來<span class="highlight">爬</span>去地探索世界。'
+                ],
+                meaning: [
+                    '手腳並用向前移動',
+                    '向上攀登',
+                    '伏地而行',
+                    '比喻努力向上'
+                ],
+                eduUrl: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=爬',
+                idiomUrl: 'https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=爬'
+            },
+            '梯': {
+                words: ['樓梯', '梯子', '階梯', '電梯', '雲梯'],
+                idioms: ['梯山航海', '梯榮階祿', '梯愚入聖'],
+                sentences: [
+                    '我每天爬<span class="highlight">梯</span>子上閣樓拿東西。',
+                    '這棟大樓有兩部電<span class="highlight">梯</span>。',
+                    '學習是成功的階<span class="highlight">梯</span>。'
+                ],
+                meaning: [
+                    '登高用的器具或設備',
+                    '形狀像梯子的',
+                    '階級、等級',
+                    '憑藉、依靠'
+                ],
+                eduUrl: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=梯',
+                idiomUrl: 'https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=梯'
+            },
+            '紙': {
+                words: ['紙張', '紙條', '紙盒', '紙飛機', '報紙'],
+                idioms: ['紙上談兵', '紙醉金迷', '一紙空文', '洛陽紙貴', '白紙黑字'],
+                sentences: [
+                    '我用彩色<span class="highlight">紙</span>做了一架飛機。',
+                    '老師發給每人一張<span class="highlight">紙</span>考試。',
+                    '這本書的<span class="highlight">紙</span>質很好，摸起來很舒服。'
+                ],
+                meaning: [
+                    '用植物纖維製成的薄片',
+                    '文件、文書',
+                    '量詞，用於文件、書信',
+                    '紙質的、紙做的'
+                ],
+                eduUrl: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=紙',
+                idiomUrl: 'https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom=紙'
+            }
+            // 其他生字資料可以繼續添加...
+        };
+        
+        // 顯示生字詳情
+        function showCharacterDetail(character, bopomofo, radical, strokes, structure) {
+            const detailSection = document.getElementById('character-detail');
+            const data = characterData[character] || {
+                words: ['詞1', '詞2', '詞3', '詞4', '詞5'],
+                idioms: ['成語1', '成語2', '成語3', '成語4', '成語5'],
+                sentences: ['例句1', '例句2', '例句3'],
+                meaning: ['字義1', '字義2', '字義3', '字義4'],
+                eduUrl: 'https://pedia.cloud.edu.tw/',
+                idiomUrl: 'https://dict.idioms.moe.edu.tw/'
+            };
+            
+            document.getElementById('char-large').textContent = character;
+            document.getElementById('char-bopomofo').textContent = bopomofo;
+            document.getElementById('char-radical').textContent = radical;
+            document.getElementById('char-strokes').textContent = strokes;
+            document.getElementById('char-structure').textContent = structure;
+            
+            // 更新詞語列表
+            const wordsList = document.getElementById('char-words');
+            wordsList.innerHTML = '';
+            data.words.forEach(word => {
+                const li = document.createElement('li');
+                li.textContent = word;
+                wordsList.appendChild(li);
+            });
+            
+            // 更新成語列表
+            const idiomsList = document.getElementById('char-idioms');
+            idiomsList.innerHTML = '';
+            data.idioms.forEach(idiom => {
+                const li = document.createElement('li');
+                li.textContent = idiom;
+                idiomsList.appendChild(li);
+            });
+            
+            // 更新造句列表
+            const sentencesList = document.getElementById('char-sentences');
+            sentencesList.innerHTML = '';
+            data.sentences.forEach(sentence => {
+                const li = document.createElement('li');
+                li.innerHTML = sentence;
+                sentencesList.appendChild(li);
+            });
+            
+            // 更新字義解釋
+            const meaningList = document.getElementById('char-meaning');
+            meaningList.innerHTML = '';
+            data.meaning.forEach(meaning => {
+                const li = document.createElement('li');
+                li.textContent = meaning;
+                meaningList.appendChild(li);
+            });
+            
+            // 更新外部連結
+            document.getElementById('edu-link').href = data.eduUrl;
+            document.getElementById('edu-link').innerHTML = '<i class="fas fa-external-link-alt"></i> 教育百科 - ' + character;
+            
+            document.getElementById('idiom-link').href = data.idiomUrl;
+            document.getElementById('idiom-link').innerHTML = '<i class="fas fa-external-link-alt"></i> 成語典 - ' + character + '相關成語';
+            
+            // 顯示詳情區塊
+            detailSection.style.display = 'block';
+            
+            // 滾動到詳情區塊
+            detailSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // 初始化頁面時顯示第一個生字的詳情
+        document.addEventListener('DOMContentLoaded', function() {
+            showCharacterDetail('爬', 'ㄆㄚˊ', '爪', 8, '半包圍結構');
+        });
+    </script>
+</body>
+</html>
